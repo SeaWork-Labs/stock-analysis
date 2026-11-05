@@ -21,6 +21,7 @@ Usage:
 
 import argparse
 import json
+import os
 import sys
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
@@ -30,7 +31,11 @@ from typing import Literal
 import yfinance as yf
 
 # Storage
-WATCHLIST_DIR = Path.home() / ".seaharness" / "skills" / "stock-analysis"
+# 用户数据住在 ~/.seaharness/data/stock-analysis/。技能本体是
+# ~/.seaharness/skills/stock-analysis 里的安装产物（客户端建的一条软链），升级会换掉
+# 它——数据放在那儿会跟着一起丢。
+_STATE_DIR = os.environ.get("SEAHARNESS_STATE_DIR", os.path.expanduser("~/.seaharness"))
+WATCHLIST_DIR = Path(_STATE_DIR) / "data" / "stock-analysis"
 WATCHLIST_FILE = WATCHLIST_DIR / "watchlist.json"
 
 

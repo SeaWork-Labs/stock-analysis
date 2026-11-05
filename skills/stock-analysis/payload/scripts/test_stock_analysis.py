@@ -44,6 +44,30 @@ from watchlist import (
 from portfolio import PortfolioStore
 
 
+class TestStateDirectory:
+    """用户数据住在 ~/.seaharness/data/<skill>/，不再是技能目录里面。
+
+    技能本体由客户端装在 ~/.seaharness/skills/<skill>，那是一份只读的安装产物；
+    把 portfolios.json / watchlist.json 写进去，下一次升级换掉目录就会连用户数据
+    一起丢。
+    """
+
+    def test_storage_path_uses_the_data_directory(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("SEAHARNESS_STATE_DIR", str(tmp_path))
+        from portfolio import get_storage_path
+
+        assert get_storage_path() == tmp_path / "data" / "stock-analysis" / "portfolios.json"
+
+    def test_watchlist_path_uses_the_data_directory(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("SEAHARNESS_STATE_DIR", str(tmp_path))
+        import importlib
+        import watchlist
+
+        reloaded = importlib.reload(watchlist)
+        assert reloaded.WATCHLIST_DIR == tmp_path / "data" / "stock-analysis"
+        importlib.reload(watchlist)
+
+
 class TestAssetTypeDetection:
     """Test asset type detection."""
     

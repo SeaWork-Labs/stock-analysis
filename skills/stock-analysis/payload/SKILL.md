@@ -62,7 +62,7 @@ Analyze US stocks and cryptocurrencies with 8-dimension analysis, portfolio mana
   并通过 `uv run` 拉起（`yfinance` 等），需要本机有 `uv`（`brew install uv`）。
   用 `python3` 直接跑会 `ModuleNotFoundError: yfinance`。
 - `hot_scanner.py` / `rumor_scanner.py` 只用标准库，`python3` 直接跑即可。
-- 组合与观察名单数据写在 `~/.seaharness/skills/stock-analysis/`，与技能目录分离，
+- 组合与观察名单数据写在 `~/.seaharness/data/stock-analysis/`，与技能目录分离，
   重装技能不会丢数据。
 - Twitter/X（`hot_scanner.py --no-social` 可关）需要另装 `bird`
   （`npm install -g @steipete/bird`）并已登录；没装时该源会被跳过并打印提示，不影响其余来源。
@@ -256,8 +256,8 @@ BTC, ETH, BNB, SOL, XRP, ADA, DOGE, AVAX, DOT, MATIC, LINK, ATOM, UNI, LTC, BCH,
 
 | File | Location |
 |------|----------|
-| Portfolios | `~/.seaharness/skills/stock-analysis/portfolios.json` |
-| Watchlist | `~/.seaharness/skills/stock-analysis/watchlist.json` |
+| Portfolios | `~/.seaharness/data/stock-analysis/portfolios.json` |
+| Watchlist | `~/.seaharness/data/stock-analysis/watchlist.json` |
 
 ## Limitations
 

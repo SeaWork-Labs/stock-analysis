@@ -41,9 +41,11 @@ SUPPORTED_CRYPTOS = {
 
 def get_storage_path() -> Path:
     """Get the portfolio storage path."""
-    # Use ~/.seaharness/skills/stock-analysis/portfolios.json
+    # 用户数据住在 ~/.seaharness/data/stock-analysis/portfolios.json。技能本体是
+    # ~/.seaharness/skills/stock-analysis 里的安装产物（客户端建的一条软链），升级会
+    # 换掉它——数据放在那儿会跟着一起丢。
     state_dir = os.environ.get("SEAHARNESS_STATE_DIR", os.path.expanduser("~/.seaharness"))
-    portfolio_dir = Path(state_dir) / "skills" / "stock-analysis"
+    portfolio_dir = Path(state_dir) / "data" / "stock-analysis"
     portfolio_dir.mkdir(parents=True, exist_ok=True)
     return portfolio_dir / "portfolios.json"
 
